@@ -1,4 +1,4 @@
-Домашнее задание номер 2.
+﻿Домашнее задание номер 2.
 Вариант: 5. Новостной агитатор: https://feedly.com.
 
 Задание выполнили: 
@@ -7,4 +7,8 @@
 Долгих Т.		t.dolgikh
 Ниденталь Е.	e.nidental
 
-https://docs.google.com/presentation/d/1p_oSAsa7xQjNNULo1IH_OHmezNOkC-7UjZzSKBqna7E/edit?usp=sharing
+Изменения:
+	Перерисовали MindMap.
+	Доработали часть функционала.
+
+https://www.mindmup.com/#m:g10B80iPSDGytktd1UwczFQbUc0c0E
