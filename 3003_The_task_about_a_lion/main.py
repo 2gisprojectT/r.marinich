@@ -35,8 +35,11 @@ def start_lion():
     current_state = States.full
     while True:
         current_signal = get_singal()
-        current_state = lion(current_state, current_signal)
-        print(current_state.name)
+        if current_signal != -1:
+            current_state = lion(current_state, current_signal)
+            print(current_state.name)
+        else:
+            print("try again")
 
 class TestLeon(unittest.TestCase):
     def test_FullToAntilopa(self):
