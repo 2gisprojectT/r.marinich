@@ -17,3 +17,9 @@ def create_enum_table(init_list):
         for j in range(len(Signals)):
             enum_table[i].append(init_list[i][j])
     return enum_table
+
+def leon(c_state, c_signal):
+    init_list = [[States.hungry, States.hungry, States.hungry], [States.full, States.hungry, States.hungry]]
+    FSM_table = create_enum_table(init_list)
+    return FSM_table[c_state.value][c_signal.value]
+
