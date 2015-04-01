@@ -23,3 +23,19 @@ def leon(c_state, c_signal):
     FSM_table = create_enum_table(init_list)
     return FSM_table[c_state.value][c_signal.value]
 
+class TestLeon(unittest.TestCase):
+    def test_FullToAntilopa(self):
+        self.assertEqual(leon(States.full, Signals.antelope), States.hungry)
+    def test_FullToHunter(self):
+        self.assertEqual(leon(States.full, Signals.hunter), States.hungry)
+    def test_FullToTree(self):
+        self.assertEqual(leon(States.full, Signals.tree), States.hungry)
+    def test_HungryToAntilopa(self):
+        self.assertEqual(leon(States.hungry, Signals.antelope), States.full)
+    def test_HungryToAntilopa(self):
+        self.assertEqual(leon(States.hungry, Signals.hunter), States.hungry)
+    def test_HungryToAntilopa(self):
+        self.assertEqual(leon(States.hungry, Signals.tree), States.hungry)
+
+if __name__ == '__main__':
+    unittest.main()
