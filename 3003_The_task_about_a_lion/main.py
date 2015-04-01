@@ -1,5 +1,6 @@
 from enum import IntEnum
 import unittest
+# import numpy
 
 class States(IntEnum):
     full = 0
@@ -18,9 +19,24 @@ def create_enum_table(init_list):
             enum_table[i].append(init_list[i][j])
     return enum_table
 
+def get_singal():
+    name_input = input()
+    for name, member in Signals.__members__.items():
+        if name_input == name:
+            return member
+    return -1
+
 def lion(c_state, c_signal):
     init_list = [[States.hungry, States.hungry, States.hungry], [States.full, States.hungry, States.hungry]]
+    #return numpy.fromfunction(lambda i, j: init_list[i][j], (len(Signals), len(States)), dtype=IntEnum)[c_state.value][c_signal.value]
     return create_enum_table(init_list)[c_state.value][c_signal.value]
+
+def start_lion():
+    current_state = States.full
+    while True:
+        current_signal = get_singal()
+        current_state = lion(current_state, current_signal)
+        print(current_state.name)
 
 class TestLeon(unittest.TestCase):
     def test_FullToAntilopa(self):
@@ -38,3 +54,4 @@ class TestLeon(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+    #start_lion()
