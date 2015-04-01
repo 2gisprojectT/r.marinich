@@ -33,6 +33,8 @@ def lion(c_state, c_signal):
 
 def start_lion():
     current_state = States.full
+    print("default state =", current_state.name)
+    print("write next singal: antelope, hunter, tree")
     while True:
         current_signal = get_singal()
         if current_signal != -1:
