@@ -9,9 +9,6 @@ class Lion():
     def set_init_states(self, init_states):
         self.state = init_states
 
-    def set_init_signal(self, init_signal):
-        self.signal = init_signal
-
     def set_signal(self, signal):
         self.signal = signal
 
