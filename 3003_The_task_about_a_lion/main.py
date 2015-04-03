@@ -49,6 +49,7 @@ class Lion():
         except: return -1
         return self.FA[self.getIDSt(self.state)][self.getIDSi(self.signal)]
 
+
 if __name__ == '__main__':
 
     list_states =  ["full", "hungry"]
