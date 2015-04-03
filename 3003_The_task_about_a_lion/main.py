@@ -1,58 +1,66 @@
-from enum import IntEnum
-import unittest
 
-class States(IntEnum):
-    full = 0
-    hungry = 1
 
-class Signals(IntEnum):
-    antelope = 0
-    hunter = 1
-    tree = 2
+class Lion():
+    def __init__(self, list_states, list_signal, list_actions, FS_indexs, FA_indexs):
+        self.states  = list_states
+        self.signals = list_signal
+        self.actions = list_actions
+        self.FS = FS_indexs
+        self.FA = FA_indexs
 
-def get_singal():
-    name_input = input()
-    for name, member in Signals.__members__.items():
-        if name_input == name:
-            return member
-    return -1
+    def set_init_states(self, init_states):
+        self.state = init_states
 
-def lion(how_do, init_list, c_state, c_signal):
-    return how_do(c_state.value, c_signal.value, init_list)
+    def getIDSt(self, what):
+        i = 0
+        for item in self.states:
+            if item == what:
+                return i
+            i += 1
+        return -1
 
-def start_lion():
-    current_state = States.full
-    init_list = [[States.hungry, States.hungry, States.hungry], [States.full, States.hungry, States.hungry]]
-    print("default state =", current_state.name)
-    print("write next singal: antelope, hunter, tree")
-    while True:
-        current_signal = get_singal()
-        if current_signal != -1:
-            current_state = lion(lambda i, j, clist: clist[i][j], init_list, current_state, current_signal)
-            print("current state =", current_state.name)
-        else:
-            print("try again")
+    def getIDSi(self, what):
+        i = 0
+        for item in self.signals:
+            if item == what:
+                return i
+            i += 1
+        return -1
 
-class TestLeon(unittest.TestCase):
-    def test_FullToAntilopa(self):
-        init_list = [[States.hungry, States.hungry, States.hungry], [States.full, States.hungry, States.hungry]]
-        self.assertEqual(lion(lambda i, j, clist: clist[i][j], init_list, States.full, Signals.antelope), States.hungry)
-    def test_FullToHunter(self):
-        init_list = [[States.hungry, States.hungry, States.hungry], [States.full, States.hungry, States.hungry]]
-        self.assertEqual(lion(lambda i, j, clist: clist[i][j], init_list, States.full, Signals.hunter), States.hungry)
-    def test_FullToTree(self):
-        init_list = [[States.hungry, States.hungry, States.hungry], [States.full, States.hungry, States.hungry]]
-        self.assertEqual(lion(lambda i, j, clist: clist[i][j], init_list, States.full, Signals.tree), States.hungry)
-    def test_HungryToAntilopa(self):
-        init_list = [[States.hungry, States.hungry, States.hungry], [States.full, States.hungry, States.hungry]]
-        self.assertEqual(lion(lambda i, j, clist: clist[i][j], init_list, States.hungry, Signals.antelope), States.full)
-    def test_HungryToHunter(self):
-        init_list = [[States.hungry, States.hungry, States.hungry], [States.full, States.hungry, States.hungry]]
-        self.assertEqual(lion(lambda i, j, clist: clist[i][j], init_list, States.hungry, Signals.hunter), States.hungry)
-    def test_HungryToTree(self):
-        init_list = [[States.hungry, States.hungry, States.hungry], [States.full, States.hungry, States.hungry]]
-        self.assertEqual(lion(lambda i, j, clist: clist[i][j], init_list, States.hungry, Signals.tree), States.hungry)
+    def getInitState(self):
+        return self.state
+
+    def getState(self):
+        self.state = self.FS[self.getIDSt(self.state)][self.getIDSi(self.signal)]
+        return self.state
+
+    def getAction(self, signal):
+        self.signal = signal
+        return self.FA[self.getIDSt(self.state)][self.getIDSi(signal)]
+
 
 if __name__ == '__main__':
-    unittest.main()
-    #start_lion()
+
+    list_states =  ["full", "hungry"]
+    list_signals = ["antelope", "hunter", "tree"]
+    list_actions = ["sleep", "run", "see", "eat"]
+
+    FS = [["hungry", "hungry", "hungry"], ["full", "hungry", "hungry"]]
+    FA = [["sleep", "run", "see"], ["eat", "run", "sleep"]]
+
+    L = Lion(list_states, list_signals, list_actions, FS, FA)
+
+    L.set_init_states("full")
+
+    print("default state =", L.getInitState())
+    print("write next singal: antelope, hunter, tree")
+    while True:
+        current_signal = input()
+
+        if (L.getIDSi(current_signal) != -1):
+            print("Lion", L.getAction(current_signal),". Current state =", L.getState() )
+
+            L.set_init_states("full")
+            print("Lion", L.getAction(current_signal),". Current state =", L.getState() )
+        else:
+            print("try again")
