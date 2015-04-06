@@ -15,7 +15,7 @@ class Lion():
         else:
             self.signal = None
 
-    def getID(self, what, where):
+    def _getID(self, what, where):
         i = 0
         for item in where:
             if item == what:
@@ -28,12 +28,12 @@ class Lion():
         except: return self.state
         if self.signal is None:
             return self.state
-        self.state = self.transition_table[self.getID(self.state, self.states)][self.getID(self.signal, self.signals)]
+        self.state = self.transition_table[self._getID(self.state, self.states)][self._getID(self.signal, self.signals)]
         return self.state
 
     def getAction(self):
         if self.signal is not None:
-            return self.action_table[self.getID(self.state, self.states)][self.getID(self.signal, self.signals)]
+            return self.action_table[self._getID(self.state, self.states)][self._getID(self.signal, self.signals)]
         else:
             return "doing nothing"
 
