@@ -10,7 +10,6 @@ class TestLeon(unittest.TestCase):
     action_table = None
     error_state = None
 
-
     def setUp(self):
         self.states =  ["full", "hungry"]
         self.signals = ["antelope", "hunter", "tree"]
@@ -51,12 +50,6 @@ class TestLeon(unittest.TestCase):
         L.send_signal("antelope")
         self.assertEqual( "full", L.getState() )
 
-        L.send_signal("hunter")
-        self.assertEqual( "hungry", L.getState() )
-
-        L.send_signal("tree")
-        self.assertEqual( "hungry", L.getState() )
-
     def test_SendSignalAndGetAction(self):
         L = main.Lion(self.states, self.signals, self.actions, self.transition_table, self.action_table, "full", self.error_state)
         L.send_signal("antelope")
@@ -67,16 +60,6 @@ class TestLeon(unittest.TestCase):
 
         L.send_signal("hunter")
         self.assertEqual( "run", L.getAction() )
-
-        L.send_signal("hunter")
-        self.assertEqual( "run", L.getAction() )
-
-        L.send_signal("tree")
-        self.assertEqual( "see", L.getAction() )
-
-        L.send_signal("antelope")
-        self.assertEqual( "sleep", L.getAction() )
-
 
 if __name__ == '__main__':
     unittest.main()
