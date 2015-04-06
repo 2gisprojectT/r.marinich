@@ -1,16 +1,13 @@
 class Lion():
 
-    states =  ["full", "hungry"]
-    signals = ["antelope", "hunter", "tree"]
-    actions = ["sleep", "run", "see", "eat"]
-
-    transition_table = [["hungry", "hungry", "hungry"], ["full", "hungry", "hungry"]]
-    action_table = [["sleep", "run", "see"], ["eat", "run", "sleep"]]
-
-    state = "full"
-
-    def set_init_states(self, init_states):
-        self.state = init_states
+    def __init__(self, list_states, list_signal, list_actions, transition_table, action_table, init_state, error_state):
+        self.states = list_states
+        self.signals = list_signal
+        self.actions = list_actions
+        self.transition_table = transition_table
+        self.action_table = action_table
+        self.state = init_state
+        self.error_state = error_state
 
     def send_signal(self, signal):
         if signal in self.signals:
@@ -42,7 +39,17 @@ class Lion():
 
 if __name__ == '__main__':
 
-    L = Lion()
+    states =  ["full", "hungry"]
+    signals = ["antelope", "hunter", "tree"]
+    actions = ["sleep", "run", "see", "eat"]
+
+    transition_table = [["hungry", "hungry", "hungry"], ["full", "hungry", "hungry"]]
+    action_table = [["sleep", "run", "see"], ["eat", "run", "sleep"]]
+
+    state = "full"
+    error_state = "doing nothing"
+
+    L = Lion(states, signals, actions, transition_table, action_table, state, error_state)
 
     print("default state =", L.getState())
     print("write next singal: antelope, hunter, tree")
