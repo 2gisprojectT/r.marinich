@@ -11,21 +11,33 @@ class TestLeon(unittest.TestCase):
     error_state = None
 
     def setUp(self):
-        self.states =  ["full", "hungry"]
-        self.signals = ["antelope", "hunter", "tree"]
-        self.actions = ["sleep", "run", "see", "eat"]
+        self.states =  ["test_states"]
+        self.signals = ["test_signal"]
+        self.actions = ["test_action"]
 
-        self.transition_table = [["hungry", "hungry", "hungry"], ["full", "hungry", "hungry"]]
-        self.action_table = [["sleep", "run", "see"], ["eat", "run", "sleep"]]
+        self.transition_table = [["test_states"], ["test_states"]]
+        self.action_table = [["test_action"], ["test_action"]]
 
-        self.stateFull = "full"
-        self.stateHungry = "hungry"
-        self.error_state = "doing nothing"
+        self.stateFull = "test"
+        self.stateHungry = "test"
+        self.error_state = "test"
 
-    def test_CorrectInputSinnal(self):
+    def test_send_signal(self):
         L = main.Lion(self.states, self.signals, self.actions, self.transition_table, self.action_table, self.stateFull, self.error_state)
-        L.send_signal("fdafg")
-        self.assertEqual( "doing nothing", L.getAction() )
+        L.send_signal("test_signal")
+        self.assertEqual(L.signal, "test_signal")
+        L.send_signal("abc")
+        self.assertEqual(L.signal, None)
+
+    def test_getState(self):
+        L = main.Lion(self.states, self.signals, self.actions, self.transition_table, self.action_table, self.stateFull, self.error_state)
+        L.signal = self.signals[0]
+        self.assertEqual("test_states", L.getState())
+
+    def test_GetAction(self):
+        L = main.Lion(self.states, self.signals, self.actions, self.transition_table, self.action_table, self.stateFull, self.error_state)
+        L.signal = self.signals[0]
+        self.assertEqual("test_action", L.getAction())
 
     def test_Constructor(self):
         L = main.Lion(self.states, self.signals, self.actions, self.transition_table, self.action_table, self.stateFull, self.error_state)
@@ -36,32 +48,6 @@ class TestLeon(unittest.TestCase):
         self.assertEqual(L.action_table, self.action_table)
         self.assertEqual(L.state, self.stateFull)
         self.assertEqual(L.error_state, self.error_state)
-
-    def test_SendSignalAndGetState(self):
-        L = main.Lion(self.states, self.signals, self.actions, self.transition_table, self.action_table, self.stateFull, self.error_state)
-        L.send_signal("antelope")
-        self.assertEqual( "hungry", L.getState() )
-
-        L.send_signal("hunter")
-        self.assertEqual( "hungry", L.getState() )
-
-        L.send_signal("tree")
-        self.assertEqual( "hungry", L.getState() )
-
-        L = main.Lion(self.states, self.signals, self.actions, self.transition_table, self.action_table, self.stateHungry, self.error_state)
-        L.send_signal("antelope")
-        self.assertEqual( "full", L.getState() )
-
-    def test_SendSignalAndGetAction(self):
-        L = main.Lion(self.states, self.signals, self.actions, self.transition_table, self.action_table, self.stateFull, self.error_state)
-        L.send_signal("antelope")
-        self.assertEqual( "sleep", L.getAction() )
-
-        L.send_signal("tree")
-        self.assertEqual( "see", L.getAction() )
-
-        L.send_signal("hunter")
-        self.assertEqual( "run", L.getAction() )
 
 if __name__ == '__main__':
     unittest.main()
