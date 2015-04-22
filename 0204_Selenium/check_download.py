@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
-import unittest, time, re
+import unittest
 
 class PythonSiteUnitTest(unittest.TestCase):
     def setUp(self):
@@ -25,6 +22,8 @@ class PythonSiteUnitTest(unittest.TestCase):
         driver.find_element_by_css_selector("input.form_b").click()
         driver.find_element_by_xpath("//div[@id='Onwrapper']/div[3]/div[2]/div[2]/a[29]").click()
         driver.find_element_by_xpath("//a[@onclick=\"ShowAllReleases('51','1','99');return false;\"]").click()
+        self.driver.quit()
+        self.assertEqual([], self.verificationErrors)
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
@@ -46,10 +45,6 @@ class PythonSiteUnitTest(unittest.TestCase):
                 alert.dismiss()
             return alert_text
         finally: self.accept_next_alert = True
-    
-    def tearDown(self):
-        self.driver.quit()
-        self.assertEqual([], self.verificationErrors)
 
 if __name__ == "__main__":
     unittest.main()
