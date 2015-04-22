@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException
 import unittest
 
 class PythonSiteUnitTest(unittest.TestCase):
@@ -16,7 +14,6 @@ class PythonSiteUnitTest(unittest.TestCase):
 
         driver.find_element_by_name("login").click()
         driver.find_element_by_name("login").send_keys("g1645514@trbvm.com")
-        driver.find_element_by_name("password").clear()
         driver.find_element_by_name("password").send_keys("g1645514@trbvm.comg1645514@trbvm.com")
         driver.find_element_by_css_selector("input.form_b").click()
 
