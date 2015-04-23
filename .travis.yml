@@ -1,0 +1,4 @@
+language: python
+python:
+  - "3.4"
+script: "nosetests 3003_The_task_about_a_lion/test.py"
