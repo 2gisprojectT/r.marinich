@@ -16,7 +16,7 @@ class PythonSiteUnitTest(unittest.TestCase):
         driver.find_element_by_name("password").send_keys("password")
         driver.find_element_by_css_selector("input.form_b").click()
 
-        self.assertEqual('Не удалось войти.', driver.find_element_by_xpath("//*").get_attribute("outerHTML")[42:59])
+        self.assertEqual('Не удалось войти. Возможно не правильный логин/пароль', driver.find_element_by_tag_name("body").text)
         self.driver.quit()
 
 if __name__ == "__main__":
